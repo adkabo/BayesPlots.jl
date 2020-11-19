@@ -1,0 +1,11 @@
+name = "BayesPlots"
+uuid = "8f9d6a9a-41ae-4526-be2f-e315fb2d955e"
+authors = ["BayesPlots authors"]
+version = "0.0.1"
+
+[deps]
+AbstractPlotting = "537997a7-5e4e-5d89-9595-2241ea00577e"
+AlgebraOfGraphics = "cbdf2221-f076-402e-a563-3d30da359d67"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+StatsBase = "2913bbd2-ae8a-5f71-8c99-4fb6c76f3a91"
