@@ -1,7 +1,7 @@
 name = "BayesPlots"
 uuid = "8f9d6a9a-41ae-4526-be2f-e315fb2d955e"
 authors = ["BayesPlots authors"]
-version = "0.0.1"
+version = "0.0.2"
 
 [deps]
 AbstractPlotting = "537997a7-5e4e-5d89-9595-2241ea00577e"
