@@ -10,7 +10,7 @@ function paramframe(modelchains)
 end
 
 # TODO Show hpd region
-function mcdensity(mc, args...)
+function plot_density(mc, args...)
     (
         data(paramframe(mc))
         * mapping(:value, color=:chain => categorical, layout_y=:variable)
