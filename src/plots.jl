@@ -10,21 +10,21 @@ function paramframe(modelchains)
 end
 
 # TODO Show hpd region
-function plot_density(mc, args...)
+function plot_density(mc; args...)
     (
         data(paramframe(mc))
         * mapping(:value, color=:chain => categorical, layout_y=:variable)
-        * AlgebraOfGraphics.density(args...)
+        * AlgebraOfGraphics.density(;args...)
     )
 end
 
 
-function plot_histogram(mc, args...)
+function plot_histogram(mc; args...)
     (
         data(paramframe(mc))
         * mapping(layout_y=:variable)
         * mapping(:value)
-        * AlgebraOfGraphics.histogram(args...)
+        * AlgebraOfGraphics.histogram(;args...)
     )
 end
 
