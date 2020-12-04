@@ -116,6 +116,20 @@ function plot_coefficients(mc)
     )
 end
 
+function plot_chains_parallel(modelchains)
+    df = paramframe(modelchains)
+    df = transform(df, [:iteration, :chain] => ByRow(tuple) => :id)
+    df = DataFrame(sample(eachrow(df), 1000))
+    p = dims()
+    groups = groupby(df, :id)
+    (
+        data(df)
+        * mapping(:variable => categorical, :value, group = :id => categorical)
+        * visual(Lines)
+    )
+end
+
+
 # mcrhat
 # geweke
 # ppmean
