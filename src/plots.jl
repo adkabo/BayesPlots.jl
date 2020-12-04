@@ -1,8 +1,9 @@
-using DataFrames: Not, DataFrame, stack, groupby
-using AlgebraOfGraphics
-using AbstractPlotting
+using DataFrames: Not, DataFrame, unstack, stack, groupby, eachrow
+using StatsBase: StatsBase, autocor, cor, quantile, sample
+using AlgebraOfGraphics: AlgebraOfGraphics, data, dims, mapping, visual, categorical
+using AbstractPlotting: Lines, Scatter, BarPlot, Errorbars, Heatmap
 using AbstractPlotting.MakieLayout
-
+using MCMCChains: cummean
 
 function paramframe(modelchains)
     df = DataFrame(modelchains[:, names(modelchains, [:parameters]), :])
@@ -37,8 +38,6 @@ function plot_trace(mc)
         * visual(Lines)
     )
 end
-
-cummean(A) = cumsum(A) ./ (1:length(A))
 
 function plot_cummean(mc)
     df = paramframe(mc)
@@ -75,14 +74,14 @@ function plot_autocorrelation(mc)
     data(df) * mapping(:lag, :autocor,  layout_x=:chain => categorical, layout_y=:variable) * visual(BarPlot)
 end
 
-
+# Broken
 function plot_parameter_correlation(mc)
     df = unstack(paramframe(mc))
     df = df[:, names(mc, :parameters)]
     df2 = DataFrame(cor(Array(df)))
     df2 = rename(df2, names(df))
     df2[:, :x] = names(df)
-    df = DataFrames.stack(df2, Not(:x))
+    df = stack(df2, Not(:x))
     df = rename(df, :variable => :y)
     data(df) * mapping(:x => categorical, :y => categorical, color=:value) * visual(Heatmap)
 end
