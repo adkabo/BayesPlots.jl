@@ -88,25 +88,29 @@ function plot_parameter_correlation(mc)
 end
 
 
-# caterpillar/coefficients
-# Why is the 2mad smaller??
+
 # Change x axis label
 function plot_coefficients(mc)
     df = paramframe(mc)
     df = groupby(df, :variable)
     df = combine(df,
                  :value => (x->quantile(x, 0.5)) => :q50,
-                 :value => (x->quantile(x, .025)) => :q025,
-                 :value => (x->quantile(x, .25)) => :q25,
-                 :value => (x->quantile(x, .75)) => :q75,
-                 :value => (x->quantile(x, .975)) => :q975,
+                 # :value => (x->quantile(x, .025)) => :q025,
+                 # :value => (x->quantile(x, .25)) => :q25,
+                 # :value => (x->quantile(x, .75)) => :q75,
+                 # :value => (x->quantile(x, .975)) => :q975,
+                 :value => (x->quantile(x, .75) - quantile(x, .5)) => :e75_50,
+                 :value => (x->quantile(x, .5) - quantile(x, .25)) => :e25_50,
+                 :value => (x->quantile(x, .975) - quantile(x, .5)) => :e975_50,
+                 :value => (x->quantile(x, .5) - quantile(x, .025)) => :e025_50,
                  )
     df = rename(df, :variable => :parameter)
+
     (
         data(df) * (
-            mapping(:q50, :parameter) * visual(Scatter)
-            + mapping(:q50, :parameter, :q25, :q75) * visual(Errorbars, direction=:x, linewidth=4, whiskerwidth=0)
-            + mapping(:q50, :parameter, :q025, :q975) * visual(Errorbars, direction=:x, color=:red)
+            mapping(:q50, :parameter) * visual(Scatter, markersize=6)
+            + mapping(:q50, :parameter, :e25_50, :e75_50) * visual(Errorbars, direction=:x, linewidth=4, whiskerwidth=0)
+            + mapping(:q50, :parameter, :e025_50, :e975_50) * visual(Errorbars, direction=:x, color=:gray)
         )
 
     )
