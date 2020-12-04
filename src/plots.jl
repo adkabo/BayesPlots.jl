@@ -1,4 +1,4 @@
-using DataFrames: Not, DataFrame, stack
+using DataFrames: Not, DataFrame, stack, groupby
 using AlgebraOfGraphics
 using AbstractPlotting
 using AbstractPlotting.MakieLayout
