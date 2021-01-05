@@ -1,4 +1,4 @@
-using DataFrames: Not, DataFrame, unstack, stack, groupby, eachrow
+using DataFrames: Not, DataFrame, unstack, stack, groupby, eachrow, combine
 using StatsBase: StatsBase, autocor, cor, quantile, sample
 using AlgebraOfGraphics: AlgebraOfGraphics, data, dims, mapping, visual, categorical
 using AbstractPlotting: Lines, Scatter, BarPlot, Errorbars, Heatmap
