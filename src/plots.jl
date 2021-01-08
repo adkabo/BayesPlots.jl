@@ -34,7 +34,7 @@ function plot_trace(mc)
         data(paramframe(mc))
         * mapping(layout_y=:variable)
         * mapping(:iteration, :value)
-        * mapping(color=:chain )
+        * mapping(color=:chain => categorical)
         * visual(Lines)
     )
 end
@@ -83,7 +83,7 @@ function plot_parameter_correlation(mc)
     df2[:, :x] = names(df)
     df = stack(df2, Not(:x))
     df = rename(df, :variable => :y)
-    data(df) * mapping(:x => categorical, :y => categorical, color=:value) * visual(Heatmap)
+    data(df) * mapping(:x => categorical, :y => categorical, color=:value => categorical) * visual(Heatmap)
 end
 
 
